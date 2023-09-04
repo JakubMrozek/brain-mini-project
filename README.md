@@ -1,5 +1,4 @@
 # Brain mini project
-# Brain mini project
 
 This project is a small application built on the Next.js framework and integrated with Firebase. This README will provide you with information on installation, setting up the .env file, and running tests.
 
