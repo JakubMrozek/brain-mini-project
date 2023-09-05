@@ -14,6 +14,7 @@ interface IButtonAdd {
 export default function ButtonAdd ({ insertExpense }: IButtonAdd) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [channel, setChannel] = useState('fb')
   const [value, setValue] = useState<number>()
@@ -31,13 +32,13 @@ export default function ButtonAdd ({ insertExpense }: IButtonAdd) {
   }
 
   const onSubmit = async () => {
+    setIsSubmitting(true)
     try {
       const data = cleanDataBeforeSave(validateForm(channel, value, date))
       await insertExpense(data)
       resetToDefault()
       onClose()
       toast(getToastOk('Created', 'A new expense item has been created.'))
-
     } catch (e) {
       toast(
         getToastError(
@@ -46,6 +47,7 @@ export default function ButtonAdd ({ insertExpense }: IButtonAdd) {
         )
       )
     }
+    setIsSubmitting(false)
   }
 
   return (
@@ -68,6 +70,7 @@ export default function ButtonAdd ({ insertExpense }: IButtonAdd) {
         isOpen={isOpen}
         onCancel={onCancel}
         onSubmit={onSubmit}
+        isSubmitting={isSubmitting}
       />
     </>
   )

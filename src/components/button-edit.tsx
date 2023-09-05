@@ -15,12 +15,14 @@ interface IButtonEdit extends IExpense {
 export default function ButtonEdit ({ id, updateExpense, ...props }: IButtonEdit) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const toast = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const [channel, setChannel] = useState(props.channel)
   const [value, setValue] = useState<number | undefined>(props.value)
   const [date, setDate] = useState<Date | undefined>(props.date)
 
   const onSubmit = async () => {
+    setIsSubmitting(true)
     try {
       const data = cleanDataBeforeSave(validateForm(channel, value, date))
       await updateExpense({ id, ...data })
@@ -34,6 +36,7 @@ export default function ButtonEdit ({ id, updateExpense, ...props }: IButtonEdit
         )
       )
     }
+    setIsSubmitting(false)
   }
 
   return (
@@ -55,6 +58,7 @@ export default function ButtonEdit ({ id, updateExpense, ...props }: IButtonEdit
         isOpen={isOpen}
         onCancel={onClose}
         onSubmit={onSubmit}
+        isSubmitting={isSubmitting}
       />
     </>
   )

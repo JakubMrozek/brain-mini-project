@@ -9,6 +9,7 @@ interface IFormModal {
   value?: number
   channel: string
   isOpen: boolean
+  isSubmitting: boolean
   setDate: (date?: Date) => void
   setValue: (value?: number) => void
   setChannel: (channel: string) => void
@@ -16,7 +17,7 @@ interface IFormModal {
   onSubmit: () => Promise<void>
 }
 
-export default function FormModal ({ date, setDate, value, setValue, channel, setChannel, isOpen, onCancel, onSubmit }: IFormModal) {
+export default function FormModal ({ date, setDate, value, setValue, channel, setChannel, isOpen, isSubmitting, onCancel, onSubmit }: IFormModal) {
   const initialRef = useRef(null)
   const finalRef = useRef(null)
 
@@ -71,6 +72,7 @@ export default function FormModal ({ date, setDate, value, setValue, channel, se
               colorScheme='teal'
               type='submit'
               isDisabled={!date || !value || !channel}
+              isLoading={isSubmitting}
             >
               Save
             </Button>

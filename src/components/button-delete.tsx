@@ -1,5 +1,5 @@
 import type { IDeleteExpense } from '~/utils/db'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useDisclosure, Button, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogBody, AlertDialogHeader, AlertDialogFooter, useToast } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { getToastError, getToastOk } from '~/utils/notification'
@@ -13,8 +13,10 @@ export default function ButtonDelete ({ id, deleteExpense }: IButtonDelete) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<HTMLButtonElement>(null)
   const toast = useToast()
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const onDelete = async () => {
+    setIsDeleting(true)
     try {
       await deleteExpense(id)
       onClose()
@@ -22,6 +24,7 @@ export default function ButtonDelete ({ id, deleteExpense }: IButtonDelete) {
     } catch (err) {
       toast(getToastError('Error', 'Failed to delete the expense item. Please try again later or contact support.'))
     }
+    setIsDeleting(false)
   }
   return (
     <>
@@ -58,6 +61,7 @@ export default function ButtonDelete ({ id, deleteExpense }: IButtonDelete) {
               <Button
                 colorScheme='red'
                 onClick={() => void onDelete()} ml={3}
+                isLoading={isDeleting}
               >
                 Delete
               </Button>
