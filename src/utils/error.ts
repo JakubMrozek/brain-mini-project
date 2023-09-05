@@ -1,4 +1,3 @@
-import type { UseToastOptions } from '@chakra-ui/react'
 import { ZodError } from 'zod'
 
 export const getFormError = (err: unknown, defaultMessage: string) => {

@@ -68,7 +68,4 @@ export default function ButtonDelete ({ id, deleteExpense }: IButtonDelete) {
     </>
   )
 }
-function toast(arg0: any) {
-  throw new Error('Function not implemented.')
-}
 
