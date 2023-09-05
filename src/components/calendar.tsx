@@ -27,7 +27,7 @@ export default function Calendar ({ monday, setMonday }: ICalendar) {
     >
       <Box>
         <IconButton
-          aria-label='Previuos'
+          aria-label='Previous'
           icon={<ArrowBackIcon />}
           onClick={onClickPrevious}
         />
