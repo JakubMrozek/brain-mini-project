@@ -6,7 +6,7 @@ import Calendar from '../calendar'
 describe('components', () => {
   describe('Calendar', () => {
     it('renders correctly', () => {
-      const monday = new Date('2023-09-04')
+      const monday = new Date('2023-09-04T00:00:00.000Z')
       const setMonday = jest.fn()
 
       const { getByLabelText, getByText } = render(

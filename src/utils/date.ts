@@ -26,6 +26,7 @@ export const getPreviousMonday = (monday: Date) => {
 export const getDateFrom = (monday: Date) => {
   const date = new Date(monday)
   date.setHours(0, 0, 0, 0)
+  console.log(date)
   return date.getTime()
 }
 
