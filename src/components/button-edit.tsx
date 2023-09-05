@@ -3,7 +3,7 @@ import { type IUpdateExpense, cleanDataBeforeSave } from '~/utils/db'
 import { useState } from 'react'
 import { useDisclosure, Button, useToast } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
-import { getToastError } from '~/utils/error'
+import { getToastError, getToastOk } from '~/utils/notification'
 import { validateForm } from '~/utils/validate'
 import FormModal from './form-modal'
 import { getFormError } from '~/utils/error'
@@ -25,9 +25,11 @@ export default function ButtonEdit ({ id, updateExpense, ...props }: IButtonEdit
       const data = cleanDataBeforeSave(validateForm(channel, value, date))
       await updateExpense({ id, ...data })
       onClose()
+      toast(getToastOk('Edited', 'The expense item has been updated.'))
     } catch (e) {
       toast(
         getToastError(
+          'Error',
           getFormError(e, 'Failed to update the expense item. Please try again later or contact support.')
         )
       )

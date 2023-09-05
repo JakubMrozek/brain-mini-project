@@ -1,8 +1,8 @@
 import type { IDeleteExpense } from '~/utils/db'
 import { useRef } from 'react'
-import { useDisclosure, Button, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogBody, AlertDialogHeader, AlertDialogFooter } from '@chakra-ui/react'
+import { useDisclosure, Button, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogBody, AlertDialogHeader, AlertDialogFooter, useToast } from '@chakra-ui/react'
 import { DeleteIcon } from '@chakra-ui/icons'
-import { getToastError } from '~/utils/error'
+import { getToastError, getToastOk } from '~/utils/notification'
 
 interface IButtonDelete {
   id: string
@@ -12,13 +12,15 @@ interface IButtonDelete {
 export default function ButtonDelete ({ id, deleteExpense }: IButtonDelete) {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef<HTMLButtonElement>(null)
+  const toast = useToast()
 
   const onDelete = async () => {
     try {
       await deleteExpense(id)
       onClose()
+      toast(getToastOk('Deleted', 'The expense item has been deleted.'))
     } catch (err) {
-      getToastError('Failed to delete the expense item. Please try again later or contact support.')
+      toast(getToastError('Error', 'Failed to delete the expense item. Please try again later or contact support.'))
     }
   }
   return (
@@ -66,3 +68,7 @@ export default function ButtonDelete ({ id, deleteExpense }: IButtonDelete) {
     </>
   )
 }
+function toast(arg0: any) {
+  throw new Error('Function not implemented.')
+}
+

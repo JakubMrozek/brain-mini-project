@@ -2,7 +2,7 @@ import { cleanDataBeforeSave, type IInsertExpense } from '~/utils/db'
 import { useState } from 'react'
 import { useDisclosure, Button, useToast } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
-import { getToastError } from '~/utils/error'
+import { getToastError, getToastOk } from '~/utils/notification'
 import { validateForm } from '~/utils/validate'
 import FormModal from './form-modal'
 import { getFormError } from '~/utils/error'
@@ -36,9 +36,12 @@ export default function ButtonAdd ({ insertExpense }: IButtonAdd) {
       await insertExpense(data)
       resetToDefault()
       onClose()
+      toast(getToastOk('Created', 'A new expense item has been created.'))
+
     } catch (e) {
       toast(
         getToastError(
+          'Error',
           getFormError(e, 'Failed to insert the expense item. Please try again later or contact support.')
         )
       )

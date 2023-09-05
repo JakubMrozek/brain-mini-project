@@ -7,11 +7,3 @@ export const getFormError = (err: unknown, defaultMessage: string) => {
   }
   return defaultMessage
 }
-
-export const getToastError = (description: string): UseToastOptions => ({
-  description,
-  title: 'Error',
-  status: 'error',
-  duration: 5000,
-  isClosable: true
-})
