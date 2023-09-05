@@ -25,6 +25,7 @@ export const insertExpense = (db: Database) => async (data: Omit<IExpense, 'id'>
     })
   } catch (err) {
     // log to sentry or other error log ...
+    // eslint-disable-next-line no-console
     console.error(err)
     throw err
   }
@@ -39,6 +40,7 @@ export const updateExpense = (db: Database) => async (data: IExpense) => {
     })
   } catch (err) {
     // log to sentry or other error log ...
+    // eslint-disable-next-line no-console
     console.error(err)
     throw err
   }
@@ -49,6 +51,7 @@ export const deleteExpense = (db: Database) => async (id: string) => {
     await remove(ref(db, `${COLLECTION}/${id}`))
   } catch (err) {
     // log to sentry or other error log ...
+    // eslint-disable-next-line no-console
     console.error(err)
     throw err
   }

@@ -13,6 +13,7 @@ const config = {
   rules: {
     'semi': ['warn', 'never'],
     'quotes': ['warn', 'single'],
+    'no-console': 'warn',
     '@typescript-eslint/consistent-type-imports': [
       'warn',
       {
